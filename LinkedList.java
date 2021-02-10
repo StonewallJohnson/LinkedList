@@ -3,8 +3,8 @@ public class LinkedList<E>{
     Node<E> head;
 
     private class Node<T>{
-        T con;
-        Node<T> next;
+        private T con;
+        private Node<T> next;
 
         public Node(T val, Node<T> link){
             con = val;
@@ -16,6 +16,15 @@ public class LinkedList<E>{
         }
     }
 
+    public LinkedList(){
+        size = 0;
+        head = null;
+    }
+
+    /**
+     * Adds the given value to the linked list
+     * @param val value to add
+     */
     public void add(E val){
         checkValNull(val);
         
@@ -33,6 +42,96 @@ public class LinkedList<E>{
             temp.next = new Node<E>(val);
         }
         size++;
+    }
+
+    /**
+     * Makes this value the head node
+     * @param val value to be added
+     */
+    public void addFront(E val){
+        Node<E> temp = new Node<E>(val, head);
+        head = temp;
+        size++;
+    }
+
+    /**
+     * Finds the given value in the linked list
+     * @param val the value searched for
+     * @return the val if found, null if not
+     */
+    public E get(E val){
+        return getRecur(head, val);
+    }
+
+    /**
+     * 
+     * @return the head of the linked list
+     */
+    public E getHead(){
+        return head.con;
+    }
+
+    private E getRecur(Node<E> current, E val){
+        if(current == null){
+            //base case: val not in list
+            return null;
+        }
+        else if(current.con.equals(val)){
+            //base case: found val
+            return current.con;
+        }
+        else{
+            //recurse
+            return getRecur(current.next, val);
+        }
+    }
+
+    /**
+     * Removes the given value from the linked list
+     * @param val the value to be removed
+     */
+    public void remove(E val){
+        if(size() == 1){
+            //removing head
+            head = null;
+        }
+        else{
+            Node<E> temp = head;
+            while(temp.next != null && !temp.next.con.equals(val)){
+                //temp.next is not val and not null
+                temp = temp.next;
+            }
+            if(temp.next != null){
+                //val is found
+                temp.next = temp.next.next;
+            }
+        }
+        size--;
+    }
+    
+    /**
+     * Removes the head
+     */
+    public void removeFront(){
+        if(size > 0){
+            head = head.next;
+            size--;
+        }
+        else{
+            System.out.println("bad");
+        }
+    }
+
+    /**
+     * Makes the linked list empty
+     */
+    public void empty(){
+        head = null;
+        size = 0;
+    }
+
+    public int size(){
+        return size;
     }
 
     private void checkValNull(E val){
