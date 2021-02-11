@@ -91,12 +91,13 @@ public class LinkedList<E>{
      * @param val the value to be removed
      */
     public void remove(E val){
-        if(size() == 1){
+        Node<E> temp = head;
+        if(temp.con.equals(val)){
             //removing head
-            head = null;
+            head = head.next;
         }
         else{
-            Node<E> temp = head;
+            //removing internal node
             while(temp.next != null && !temp.next.con.equals(val)){
                 //temp.next is not val and not null
                 temp = temp.next;
