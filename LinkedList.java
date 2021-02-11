@@ -134,6 +134,18 @@ public class LinkedList<E>{
         return size;
     }
 
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        Node<E> temp = head;
+        while(temp != null){
+            //for every element in the list
+            str.append(temp.con.toString() + ", ");
+            temp = temp.next;
+        }
+
+        return str.toString();
+    }
+
     private void checkValNull(E val){
         if(val == null){
             throw new IllegalArgumentException("Can't store null!");
