@@ -113,7 +113,8 @@ public class LinkedList<E>{
     /**
      * Removes the head
      */
-    public void removeFront(){
+    public E removeFront(){
+        E val = head.con;
         if(size > 0){
             head = head.next;
             size--;
@@ -121,6 +122,7 @@ public class LinkedList<E>{
         else{
             System.out.println("bad");
         }
+        return val;
     }
 
     /**
